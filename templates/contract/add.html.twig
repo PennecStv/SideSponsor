@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout de Contrat{% endblock %}
+
+{% block body %}
+
+    <div class="contract_form">
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="input_name">
+            </div>
+            <div class="mb-3">
+                <label for="mecene" class="form-label">Nom du mécène</label>
+                <input type="text" class="form-control" id="exampleInputPassword1">
+            </div>
+
+            <div class="mb-3">
+                <label for="begin_date" class="form-label">Date de début</label>
+                <input type="date" class="form-control" id="exampleInputEmail1">
+            </div>
+
+            <div class="mb-3">
+                <label for="end_date" class="form-label">Date de fin</label>
+                <input type="date" class="form-control" id="exampleInputEmail1">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Créer le contrat</button>
+        </form>
+    </div>
+
+
+{% endblock %}
