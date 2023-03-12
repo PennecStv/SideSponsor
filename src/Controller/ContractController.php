@@ -33,21 +33,20 @@ class ContractController extends AbstractController
         //$this->getDoctrine();
         $entityManager = $doctrine->getManager();
 
-        //$contract = new Contract();
-        //$form = $this->createForm(ContractType::class, $contract);
-
         $contract = new Contract();
+        $form = $this->createForm(ContractType::class, $contract);
+
         //$name = $request->request->get("name");
-        //$contract->setName($name);
+        $contract->setName("Gates");
 
         //$mecene_name = $request->request->get("mecene");
-        $contract->setMeceneName($mecene_name);
+        $contract->setMeceneName("Microsoft");
 
-        $begindate = $request->request->get("begin_date");
-        $contract->setBeginDate($begindate);
+        //$begindate = $request->request->get("begin_date");
+        $contract->setBeginDate(\DateTime::createFromFormat("d-m-Y", "13-02-2003"));
 
-        $enddate  = $request->request->get("end_date");
-        $contract->setEndDate($enddate);
+        //$enddate  = $request->request->get("end_date");
+        $contract->setEndDate(\DateTime::createFromFormat("d-m-Y", "23-02-2023"));
 
         $entityManager->persist($contract);
         $entityManager->flush();
@@ -55,7 +54,8 @@ class ContractController extends AbstractController
 
         return $this->render('contract/add.html.twig', [
             'controller_name' => 'ContractController',
-            //'form' => $form->createView()
+            'contract' => $contract,
+            'form' => $form->createView()
         ]);
     }
 }
