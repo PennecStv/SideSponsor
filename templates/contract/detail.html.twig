@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Contrat de sponsor {% endblock %}
+
+{% block body %}
+
+    <div>
+        <button type="button" class="btn btn-primary">< Retour</button>
+    </div>
+
+    <div>
+        <h1> Contrat N°{{ contract.id }}</h1>
+        <p>Nom : {{ contract.name }}</p>
+        <p>Nom du mécène : {{ contract.mecenename }}</p>
+        <p>Date de début : {{ contract.begindate }}</p>
+        <p>Date de fin : {{ contract.enddate }}</p>
+    </div>
+
+    <div>
+        <button type="button" class="btn btn-danger">Supprimer</button>
+
+        <button type="button" class="btn btn-info">Info</button>
+    </div>
+
+{% endblock %}

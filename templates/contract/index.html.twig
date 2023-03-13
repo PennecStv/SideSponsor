@@ -1,23 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste de contract de Sponsor{% endblock %}
+{% block title %}Liste de contract de Sponsors{% endblock %}
 
 {% block body %}
 
     <div class="header">
         <h1> Liste des contrats </h1>
-        <a class="btn btn-primary" href="contract/add" role="button"> + </a>
+        <a class="btn btn-primary" href="/contract/add" role="button"> + </a>
     </div>
+
 
     <div class="container">
         {% if contract_list is defined %}
-            <ul class="list-group list-group-flush">
-                {% for contract in contract_list %}
-                    <li>
-                        {{ contract }}
-                    </li>
-                {% endfor %}
-            </ul>
+            {% for contract in contract_list %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"> Nom : {{ contract.name }} </h5>
+                        <h6 class="card-subtitle mb-2 text-muted"> Nom du mécène : {{ contract.mecenename }} </h6>
+                        <div class="date_info">
+                            <p class="card-text"> Date de début :  {{ contract.begindate|date('d-m-Y') }} </p>
+                            <p class="card-text"> Date de fin :  {{ contract.enddate|date('d-m-Y') }} </p>
+                        </div>
+                        <div class="contract-button">
+                            <a href="{{ path('contract.info', {id: contract.id }) }}" class="card-link">Voir</a>
+                            <a href="#" class="card-link">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         {% else %}
             Aucun contract a été effectué pour le moment...
         {% endif %}

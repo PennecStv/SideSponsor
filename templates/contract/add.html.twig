@@ -4,39 +4,12 @@
 
 {% block body %}
 
-    <div class="first_form">
-        {{ form(form) }}
+    <div>
+        <button type="button" class="btn btn-primary">Primary</button>
     </div>
-
-    <div class="alert alert-success">
-        Le contrat intitulé {{ contract.name }} a été ajouté à la BD !
-    </div>
-
 
     <div class="contract_form">
-        <form method="POST" action="/contract">
-            <div class="mb-3">
-                <label for="name" class="form-label">Nom</label>
-                <input type="text" name="name" class="form-control" id="input_name">
-            </div>
-            <div class="mb-3">
-                <label for="mecene" class="form-label">Nom du mécène</label>
-                <input type="text" name="mecene" class="form-control" id="exampleInputPassword1">
-            </div>
-
-            <div class="mb-3">
-                <label for="begin_date" class="form-label">Date de début</label>
-                <input type="date" name=begin_date" class="form-control" id="exampleInputEmail1">
-            </div>
-
-            <div class="mb-3">
-                <label for="end_date" class="form-label">Date de fin</label>
-                <input type="date" name="end_date" class="form-control" id="exampleInputEmail1">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Créer le contrat</button>
-        </form>
+        {{ form(form) }}
     </div>
-
 
 {% endblock %}

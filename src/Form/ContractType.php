@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Contract;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,10 +15,25 @@ class ContractType extends AbstractType
     {
         $builder
             ->add('name')
+
             ->add('mecene_name')
-            ->add('begin_date')
-            ->add('end_date')
-            ->add('Creer_le_contrat', SubmitType::class)
+
+            ->add('begin_date',DateType::Class, array(
+                'widget' => 'choice',
+                'years' => range(date('Y')-20, date('Y')+20),
+                'months' => range(1, 12),
+                'days' => range(1, 31),
+            ))
+
+            ->add('end_date',DateType::Class, array(
+                'widget' => 'choice',
+                'years' => range(date('Y')-20, date('Y')+20),
+                'months' => range(1, 12),
+                'days' => range(1, 31),
+            ))
+
+
+            ->add('Ajouter_le_contrat', SubmitType::class)
         ;
     }
 

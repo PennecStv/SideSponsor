@@ -6,56 +6,76 @@ use App\Entity\Contract;
 use App\Form\ContractType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ContractController extends AbstractController
 {
-    #[Route('/contract', name: 'app_contract')]
-    public function index(): Response
+    #[Route('/contract', name: 'contract')]
+    public function index(ManagerRegistry $doctrine): Response
     {
-        $contract_list = array(
-            "nom" => "Steve",
-            "nom_mecene" => "Apple",
-            "date_debut" => "13/02/2003",
-            "date_fin"   => "31/03/2023"
-        );
+        $repository = $doctrine->getRepository(Contract::class);
+
+        $contract_list = $repository->findAll();
 
         return $this->render('contract/index.html.twig', [
-            'controller_name' => 'ContractController',
-            "contract_list"   => $contract_list
+            'contract_list'   => $contract_list
+        ]);
+    }
+
+    #[Route('/contract/{id<\d+>}', name: 'contract.info')]
+    public function infoContract(Contract $contract = null, $id): Response
+    {
+        //$repository = $doctrine->getRepository(Contract::class);
+        //$contract = $repository->find($id);
+        if (!$contract){
+            $this->addFlash('error', "Le contract d'ID $id n'existe pas.");
+            return $this->redirectToRoute('app_contract');
+        }
+        return $this->render('contract/detail.html.twig', [
+            'contract'   => $contract
         ]);
     }
 
     #[Route('/contract/add', name: 'contract.add')]
-    public function addContract(ManagerRegistry $doctrine) : Response {
+    public function addContract(ManagerRegistry $doctrine, Request $request) : Response {
 
-        //$this->getDoctrine();
         $entityManager = $doctrine->getManager();
 
         $contract = new Contract();
         $form = $this->createForm(ContractType::class, $contract);
 
-        //$name = $request->request->get("name");
-        $contract->setName("Gates");
+        $form->handleRequest($request);
 
-        //$mecene_name = $request->request->get("mecene");
-        $contract->setMeceneName("Microsoft");
+        if ($form->isSubmitted()) {
+            $entityManager->persist($contract);
+            $entityManager->flush();
 
-        //$begindate = $request->request->get("begin_date");
-        $contract->setBeginDate(\DateTime::createFromFormat("d-m-Y", "13-02-2003"));
+            $this->addFlash('info', "Le contrat de ".$contract->getName()." a été ajouté.");
+            return $this->redirectToRoute("contract");
+        } else {
+            return $this->render('contract/add.html.twig', [
+                'contract' => $contract,
+                'form' => $form->createView()
+            ]);
+        }
+    }
 
-        //$enddate  = $request->request->get("end_date");
-        $contract->setEndDate(\DateTime::createFromFormat("d-m-Y", "23-02-2023"));
+    #[Route('/contract/delete/{id}', name: 'contract.delete')]
+    public function deleteContract(Contract $contract = null, ManagerRegistry $doctrine): RedirectResponse {
 
-        $entityManager->persist($contract);
-        $entityManager->flush();
+        if ($contract) {
+            $manager = $doctrine->getManager();
+            $manager->remove($contract);
+            $manager->flush();
 
+            $this->addFlash('success', "Ce contrat a bien été supprimé.");
+        } else {
+            $this->addFlash('error', "Contrat inexistant.");
+        }
 
-        return $this->render('contract/add.html.twig', [
-            'controller_name' => 'ContractController',
-            'contract' => $contract,
-            'form' => $form->createView()
-        ]);
+        return $this->redirectToRoute("app_contract");
     }
 }
