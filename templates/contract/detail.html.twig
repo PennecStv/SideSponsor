@@ -4,19 +4,25 @@
 
 {% block body %}
 
-    <div>
+    <div class="previous-button">
         <a type="button" href="/contract" class="btn btn-primary"><i class="fa-solid fa-caret-left"></i> Retour</a>
     </div>
 
-    <div>
+    <div class="contract-detail">
         <h1> Contrat N°{{ contract.id }}</h1>
-        <p>Nom : {{ contract.name }}</p>
-        <p>Nom du mécène : {{ contract.mecenename }}</p>
-        <p>Date de début : {{ contract.begindate|date('d-m-Y') }}</p>
-        <p>Date de fin : {{ contract.enddate|date('d-m-Y') }}</p>
+        <div class="card contract-info" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Nom : {{ contract.name }}</li>
+                <li class="list-group-item">Nom du mécène : {{ contract.mecenename }}</li>
+                <li class="list-group-item">Date de début : {{ contract.begindate|date('d-m-Y') }}</li>
+                <li class="list-group-item">Date de fin : {{ contract.enddate|date('d-m-Y') }}</li>
+            </ul>
+
+        </div>
+
     </div>
 
-    <div>
+    <div class="detail-button">
         <a type="button"  href="/contract/delete/{{ contract.id }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Supprimer</a>
 
         <a type="button" href="/contract/pdf/{{ contract.id }}" class="btn btn-info"><i class="fa-solid fa-file-pdf"></i> Exporter en PDF</a>

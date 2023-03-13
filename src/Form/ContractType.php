@@ -31,6 +31,7 @@ class ContractType extends AbstractType
             ->add('begin_date',DateType::Class, array(
                 'label' => "Date de début du contrat",
                 'widget' => 'choice',
+                'data' => new \DateTime(),
                 'years' => range(date('Y')-20, date('Y')+20),
                 'months' => range(1, 12),
                 'days' => range(1, 31),
@@ -39,6 +40,7 @@ class ContractType extends AbstractType
             ->add('end_date',DateType::Class, array(
                 'label' => "Date de fin du contrat",
                 'widget' => 'choice',
+                'data' => new \DateTime(),
                 'years' => range(date('Y')-20, date('Y')+20),
                 'months' => range(1, 12),
                 'days' => range(1, 31),
