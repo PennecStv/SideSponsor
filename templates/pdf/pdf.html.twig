@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contrat de mécénat</title>
+</head>
+<body>
+    <div>
+        <p>Ce contrat a été établi entre d'une part : </p>
+        <p>SIDEAPPS</p>
+    </div>
+
+    <div>
+        <p>Et d'une autre part :</p>
+        <p> {{ contract.mecenename }} </p>
+    </div>
+
+    <div>
+        <p> Et sera valide du </p>
+        {{ contract.begindate|date('d-m-Y') }}
+        <p> au </p>
+        {{ contract.enddate|date('d-m-Y') }}
+    </div>
+
+    <div>
+        Signature :
+    </div>
+</body>
+</html>

@@ -6,7 +6,7 @@
 
     <div class="header">
         <h1> Liste des contrats </h1>
-        <a class="btn btn-primary" href="/contract/add" role="button"> + </a>
+        <a class="btn btn-primary" href="/contract/add" type="button"> <i class="fa-sharp fa-solid fa-plus"></i> </a>
     </div>
 
 
@@ -22,8 +22,7 @@
                             <p class="card-text"> Date de fin :  {{ contract.enddate|date('d-m-Y') }} </p>
                         </div>
                         <div class="contract-button">
-                            <a href="{{ path('contract.info', {id: contract.id }) }}" class="card-link">Voir</a>
-                            <a href="#" class="card-link">Supprimer</a>
+                            <a href="{{ path('contract.info', {id: contract.id }) }}" class="card-link"><i class="fa-regular fa-eye"></i></a>
                         </div>
                     </div>
                 </div>

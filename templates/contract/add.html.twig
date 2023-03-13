@@ -5,11 +5,30 @@
 {% block body %}
 
     <div>
-        <button type="button" class="btn btn-primary">Primary</button>
+        <a type="button" href="/contract" class="btn btn-primary"><i class="fa-solid fa-caret-left"></i> Retour</a>
     </div>
 
     <div class="contract_form">
-        {{ form(form) }}
+        {{ form_start(form) }}
+
+        {{ form_row(form.name) }}
+
+        {{ form_row(form.mecene_name) }}
+
+        <div>
+            <i class="fa fa-calendar"></i> {{ form_label(form.begin_date) }}
+        </div>
+        {{ form_widget(form.begin_date) }}
+
+        <div>
+            <i class="fa fa-calendar"></i> {{ form_label(form.end_date) }}
+        </div>
+        {{ form_widget(form.end_date) }}
+
+        <div class="form-error">
+                {{ form_errors(form) }}
+        </div>
+        {{ form_end(form) }}
     </div>
 
 {% endblock %}

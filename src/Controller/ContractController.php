@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contract;
 use App\Form\ContractType;
+use App\Service\PdfService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -76,6 +77,13 @@ class ContractController extends AbstractController
             $this->addFlash('error', "Contrat inexistant.");
         }
 
-        return $this->redirectToRoute("app_contract");
+        return $this->redirectToRoute("contract");
+    }
+
+    #[Route('/contract/pdf/{id}', name: 'contract.pdf')]
+    public function generateContractPdf(Contract $contract = null, PdfService $pdf) {
+        $html = $this->render("/pdf/pdf.html.twig", ["contract" => $contract]);
+
+        $pdf->showPdfFile($html);
     }
 }

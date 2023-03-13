@@ -14,11 +14,22 @@ class ContractType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', null, [
+                'label' => "Nom",
+                'attr' => array(
+                    'placeholder' => "Nom du titulaire du contrat"
+                )
+            ])
 
-            ->add('mecene_name')
+            ->add('mecene_name', null, [
+                'label' => "Nom du mécène",
+                'attr' => array(
+                    'placeholder' => "Nom de la personne ou de l'entreprise du sponsor"
+                )
+            ])
 
             ->add('begin_date',DateType::Class, array(
+                'label' => "Date de début du contrat",
                 'widget' => 'choice',
                 'years' => range(date('Y')-20, date('Y')+20),
                 'months' => range(1, 12),
@@ -26,6 +37,7 @@ class ContractType extends AbstractType
             ))
 
             ->add('end_date',DateType::Class, array(
+                'label' => "Date de fin du contrat",
                 'widget' => 'choice',
                 'years' => range(date('Y')-20, date('Y')+20),
                 'months' => range(1, 12),
