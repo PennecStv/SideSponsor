@@ -8,25 +8,34 @@
     <title>Contrat de mécénat</title>
 </head>
 <body>
+
+    <div style="text-align: center">
+        <h1>Contrat de mécénat</h1>
+    </div>
+
     <div>
         <p>Ce contrat a été établi entre d'une part : </p>
-        <p>SIDEAPPS</p>
+        <h2>SIDEAPPS</h2>
     </div>
 
     <div>
         <p>Et d'une autre part :</p>
-        <p> {{ contract.mecenename }} </p>
+        <h2> {{ contract.mecenename }} </h2>
     </div>
 
     <div>
-        <p> Et sera valide du </p>
-        {{ contract.begindate|date('d-m-Y') }}
-        <p> au </p>
-        {{ contract.enddate|date('d-m-Y') }}
+        <p> Et sera valide du <strong>{{ contract.begindate|date('d-m-Y') }}</strong> au <strong>{{ contract.enddate|date('d-m-Y') }}</strong></p>
     </div>
 
-    <div>
-        Signature :
+    <style>
+        div.inline { float:left; }
+        .clearBoth { clear:both; }
+    </style>
+
+    <div class="signature">
+        <div class="inline"> Signature : </div>
+        <div class="inline" style="height: 100px; width: 200px; border: solid black;background-color: white; margin-left: 20px"></div>
     </div>
+    <div class="clearBoth"></div>
 </body>
 </html>

@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Contract;
 use App\Form\ContractType;
 use App\Service\PdfService;
+use Dompdf\Dompdf;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -81,9 +83,21 @@ class ContractController extends AbstractController
     }
 
     #[Route('/contract/pdf/{id}', name: 'contract.pdf')]
-    public function generateContractPdf(Contract $contract = null, PdfService $pdf) {
-        $html = $this->render("/pdf/pdf.html.twig", ["contract" => $contract]);
+    public function generateContractPdf(Contract $contract = null) {
 
-        $pdf->showPdfFile($html);
+
+        $html = $this->renderView('pdf/pdf.html.twig', array(
+            'contract'  => $contract
+        ));
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+
+        return new Response (
+            $dompdf->stream('resume', ["Attachment" => false]),
+            Response::HTTP_OK,
+            ['Content-Type' => 'application/pdf']
+        );
+
     }
 }

@@ -4,3 +4,23 @@ body {
     background-color: lightgray;
 }
 
+.header {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+
+i .fa-regular .fa-eye {
+    color:darkblue;
+}
