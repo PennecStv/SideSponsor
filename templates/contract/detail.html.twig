@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Contrat de sponsor {% endblock %}
+
+{% block body %}
+
+    <div class="previous-button">
+        <a type="button" href="/contract" class="btn btn-primary"><i class="fa-solid fa-caret-left"></i> Retour</a>
+    </div>
+
+    <div class="contract-detail">
+        <h1> Contrat N°{{ contract.id }}</h1>
+        <div class="card contract-info" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Nom : {{ contract.name }}</li>
+                <li class="list-group-item">Nom du mécène : {{ contract.mecenename }}</li>
+                <li class="list-group-item">Date de début : {{ contract.begindate|date('d-m-Y') }}</li>
+                <li class="list-group-item">Date de fin : {{ contract.enddate|date('d-m-Y') }}</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="detail-button">
+        <a type="button"  href="/contract/delete/{{ contract.id }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Supprimer</a>
+
+        <a type="button" href="/contract/pdf/{{ contract.id }}" class="btn btn-info"><i class="fa-solid fa-file-pdf"></i> Exporter en PDF</a>
+    </div>
+
+{% endblock %}

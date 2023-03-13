@@ -7,6 +7,8 @@
 
 // any CSS you import will output into a single css file (app.scss in this case)
 import './styles/app.scss';
+import './styles/index.css';
+import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 // start the Stimulus application
 import './bootstrap';
